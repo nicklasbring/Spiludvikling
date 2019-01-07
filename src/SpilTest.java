@@ -7,7 +7,10 @@ import com.almasb.fxgl.entity.Entity;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
+
 import java.awt.*;
+import java.util.Map;
 
 public class SpilTest extends GameApplication {
 
@@ -37,6 +40,7 @@ public class SpilTest extends GameApplication {
             @Override
             protected void onAction() {
                 player.translateX(5); //Rykker 5 pixels til højre
+                getGameState().increment("rykketPixels", +5);
             }
         }, KeyCode.D);
 
@@ -44,6 +48,7 @@ public class SpilTest extends GameApplication {
             @Override
             protected void onAction() {
                 player.translateX(-5); //Rykker 5 pixels til venstre
+                getGameState().increment("rykketPixels", +5);
             }
         }, KeyCode.A);
 
@@ -51,6 +56,7 @@ public class SpilTest extends GameApplication {
             @Override
             protected void onAction() {
                 player.translateY(-5); //Rykker 5 pixels op
+                getGameState().increment("rykketPixels", +5);
             }
         }, KeyCode.W);
 
@@ -58,11 +64,26 @@ public class SpilTest extends GameApplication {
             @Override
             protected void onAction() {
                 player.translateY(5); //Rykker 5 pixels ned
+                getGameState().increment("rykketPixels", +5);
             }
         }, KeyCode.S);
     }
 
+    @Override
+    protected void initUI() {
+        Text textPixels= new Text();
+        textPixels.setTranslateX(50);
+        textPixels.setTranslateY(100);
 
+        textPixels.textProperty().bind(getGameState().intProperty("rykketPixels").asString());
+
+        getGameScene().addUINode(textPixels);
+    }
+
+    @Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("rykketPixels", 0);
+    }
 
     public static void main(String[] args) {
             launch(args);
