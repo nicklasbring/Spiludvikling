@@ -9,6 +9,7 @@ import com.almasb.fxgl.settings.GameSettings;
             gameSettings.setHeight(720);
             gameSettings.setTitle("Spiltest");
 
+
         }
     }
 
