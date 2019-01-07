@@ -7,7 +7,6 @@ import com.almasb.fxgl.entity.Entity;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
 import java.awt.*;
 
 public class SpilTest extends GameApplication {
@@ -30,17 +29,39 @@ public class SpilTest extends GameApplication {
             }
 
 
-        @Override
-        protected void initInput() {
-            Input input = getInput();
+    @Override
+    protected void initInput() {
+        Input input = getInput();
 
-            input.addAction(new UserAction("Højre"){
-                @Override
-                protected void onAcion(){
-                    player.translateX(5); //Rykker 5 pixel til højre
-                }
-            }, KeyCode.D);
-        }
+        input.addAction(new UserAction("Højre") {
+            @Override
+            protected void onAction() {
+                player.translateX(5); //Rykker 5 pixels til højre
+            }
+        }, KeyCode.D);
+
+        input.addAction(new UserAction("Venstre") {
+            @Override
+            protected void onAction() {
+                player.translateX(-5); //Rykker 5 pixels til venstre
+            }
+        }, KeyCode.A);
+
+        input.addAction(new UserAction("Op") {
+            @Override
+            protected void onAction() {
+                player.translateY(-5); //Rykker 5 pixels op
+            }
+        }, KeyCode.W);
+
+        input.addAction(new UserAction("Ned") {
+            @Override
+            protected void onAction() {
+                player.translateY(5); //Rykker 5 pixels ned
+            }
+        }, KeyCode.S);
+    }
+
 
 
     public static void main(String[] args) {
