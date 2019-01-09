@@ -8,8 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
-import java.awt.*;
 import java.util.Map;
 
 public class SpilTest extends GameApplication {
@@ -26,10 +24,10 @@ public class SpilTest extends GameApplication {
         @Override
         protected void initGame() {
             player = Entities.builder()
-                                .at(250, 250)
-                                .viewFromNode(new Rectangle(25, 25, Color.GREEN))
-                                .buildAndAttach(getGameWorld());
-            }
+                .at(250, 250)
+                //.viewFromNode(new Rectangle(25, 25, Color.GREEN)) -- Since we don't need a rectangle anymore
+                .buildAndAttach(getGameWorld());
+        }
 
 
     @Override
