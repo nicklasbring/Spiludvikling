@@ -4,10 +4,13 @@ import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.texture.Texture;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+
+import java.security.Key;
 import java.util.Map;
 
 public class SpilTest extends GameApplication {
@@ -26,6 +29,7 @@ public class SpilTest extends GameApplication {
             player = Entities.builder()
                 .at(250, 250)
                 //.viewFromNode(new Rectangle(25, 25, Color.GREEN)) -- Since we don't need a rectangle anymore
+                .viewFromTexture("narwhal.png")
                 .buildAndAttach(getGameWorld());
         }
 
@@ -65,10 +69,24 @@ public class SpilTest extends GameApplication {
                 getGameState().increment("rykketPixels", +5);
             }
         }, KeyCode.S);
+
+        input.addAction(new UserAction("Forkert tast") {
+            @Override
+            protected void onActionBegin(){
+                getAudioPlayer().playSound("Error-tone.mp3");
+            }
+            }, KeyCode.F);
     }
+
+
 
     @Override
     protected void initUI() {
+        Texture narwhalTexture = getAssetLoader().loadTexture("narwhal.png");
+
+        narwhalTexture.setTranslateX(50);
+        narwhalTexture.setTranslateY(250);
+
         Text textPixels= new Text();
         textPixels.setTranslateX(50);
         textPixels.setTranslateY(100);
@@ -76,6 +94,7 @@ public class SpilTest extends GameApplication {
         textPixels.textProperty().bind(getGameState().intProperty("rykketPixels").asString());
 
         getGameScene().addUINode(textPixels);
+        getGameScene().addUINode(narwhalTexture);
     }
 
     @Override
