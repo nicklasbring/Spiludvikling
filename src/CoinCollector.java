@@ -4,26 +4,19 @@ import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.texture.Texture;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.security.Key;
 import java.util.Map;
 
-public class RacingGame extends GameApplication {
+public class CoinCollector extends GameApplication {
 
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(1024);
-        gameSettings.setHeight(768);
-        gameSettings.setTitle("Spiltest");
+        gameSettings.setWidth(28 * 70);
+        gameSettings.setHeight(15 * 70);
+        gameSettings.setTitle("CoinCollector");
     }
 
 
@@ -32,13 +25,13 @@ public class RacingGame extends GameApplication {
 
         @Override
         protected void initGame() {
-            player = Entities.builder()
-                .at(250, 250)
-                //.viewFromNode(new Rectangle(25, 25, Color.GREEN)) -- Har vi ikke behov for længere
-                .viewFromTexture("Racecar.png")
-                .buildAndAttach(getGameWorld());
+            getGameWorld().setLevelFromMap("Januaropgave.json");
+        //    player = Entities.builder()
+        //        .at(250, 250)
+        //        .viewFromTexture("Racecar.png")
+        //        .buildAndAttach(getGameWorld());
         }
-
+/*
     @Override
     protected void initInput() {
         Input input = getInput();
@@ -88,11 +81,6 @@ public class RacingGame extends GameApplication {
 
     @Override
     protected void initUI() {
-        //Texture raceTrackTexture = getAssetLoader().loadTexture("Racetrack.jpg");
-
-        //raceTrackTexture.setTranslateX(0);
-        //raceTrackTexture.setTranslateY(0);
-
         Text textPixels= new Text();
         textPixels.setTranslateX(50);
         textPixels.setTranslateY(100);
@@ -100,7 +88,6 @@ public class RacingGame extends GameApplication {
         textPixels.textProperty().bind(getGameState().intProperty("rykketPixels").asString());
 
         getGameScene().addUINode(textPixels);
-        //getGameScene().addUINode(raceTrackTexture);
         getGameScene().setBackgroundRepeat("Racetrack1.png");
     }
 
@@ -108,7 +95,7 @@ public class RacingGame extends GameApplication {
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("rykketPixels", 0);
     }
-
+*/
     public static void main(String[] args) {
             launch(args);
         }
