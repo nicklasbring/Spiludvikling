@@ -11,7 +11,6 @@ import java.util.Map;
 
 public class CoinCollector extends GameApplication {
 
-
     @Override
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setWidth(28 * 70);
@@ -20,18 +19,17 @@ public class CoinCollector extends GameApplication {
     }
 
 
-
     private Entity player;
 
         @Override
         protected void initGame() {
-            getGameWorld().setLevelFromMap("Januaropgave.json");
-        //    player = Entities.builder()
-        //        .at(250, 250)
-        //        .viewFromTexture("Racecar.png")
-        //        .buildAndAttach(getGameWorld());
+            //getGameWorld().setLevelFromMap("Januaropgave.json");    //Dette er metoden man skal kalde for at hente den bane jeg har lavet i Tiled
+            player = Entities.builder()
+                .at(250, 250)
+                .viewFromTexture("Racecar.png") //Bare fra det gamle spil. Den bliver selvfølgelig lavet om til en anden! :)
+                .buildAndAttach(getGameWorld());
         }
-/*
+
     @Override
     protected void initInput() {
         Input input = getInput();
@@ -78,7 +76,6 @@ public class CoinCollector extends GameApplication {
     }
 
 
-
     @Override
     protected void initUI() {
         Text textPixels= new Text();
@@ -95,7 +92,7 @@ public class CoinCollector extends GameApplication {
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("rykketPixels", 0);
     }
-*/
+
     public static void main(String[] args) {
             launch(args);
         }

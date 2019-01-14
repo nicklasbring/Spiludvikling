@@ -1,12 +1,13 @@
-import com.almasb.fxgl.entity.*;
 import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import com.almasb.fxgl.entity.EntityFactory;
+import com.almasb.fxgl.entity.SetEntityFactory;
 
-
+@SetEntityFactory
 public class CoinCollectorFactory implements EntityFactory {
 
     @Spawns("platform")
