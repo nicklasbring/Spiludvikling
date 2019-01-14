@@ -1,13 +1,13 @@
-import com.almasb.fxgl.entity.Control;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
-public class PlayerControl extends Control {
+public class PlayerControl extends Component {
 
     private PhysicsComponent physics;
 
     @Override
-    public void onUpdate(Entity entity, double v) {
+    public void onUpdate(double tpf) {
 
     }
 
@@ -21,6 +21,5 @@ public class PlayerControl extends Control {
 
     public void hop(){
         physics.setVelocityY(-200);
-
     }
 }
