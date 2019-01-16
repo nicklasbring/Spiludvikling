@@ -5,7 +5,10 @@ import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
+import java.util.Map;
 
 
 public class CoinCollector extends GameApplication {
@@ -74,6 +77,8 @@ public class CoinCollector extends GameApplication {
 
         player = getGameWorld().spawn("player", 50, 950);
 
+
+
         //Image baggrund = new Image("assets/textures/baggrund.jpg", 1920, 1080, false, false);
         //getGameScene().setBackgroundRepeat(baggrund);  --> Forstår ikke hvorfor dette ikke virker. Det gjorde det forleden
     }
@@ -89,6 +94,7 @@ public class CoinCollector extends GameApplication {
                 coincounter++;
                 coin.removeFromWorld();
                 System.out.println(coincounter);
+                getGameState().increment("coinsTotal", + 1);
             }
         });
 
@@ -97,7 +103,7 @@ public class CoinCollector extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
                 getAudioPlayer().playSound("winnersound.wav");
-                getDisplay().showMessageBox("Tillykke du klarede første level! \nDu fik i alt " + coincounter + " ud af 20");
+                getDisplay().showMessageBox("Tillykke du klarede første level! \nDu fik i alt " + coincounter + " ud af 20 coins");
                 System.out.println("Level completed");
 
             }
@@ -111,6 +117,29 @@ public class CoinCollector extends GameApplication {
             }
         });
     }
+
+
+    @Override
+    protected void initUI() {
+
+        Text coin = getUIFactory().newText("Antal coins:", Color.BLACK, 15);
+        coin.setTranslateX(890);
+        coin.setTranslateY(25);
+
+        Text coinsTotal = new Text();
+        coinsTotal.setTranslateX(980);
+        coinsTotal.setTranslateY(25);
+        coinsTotal.textProperty().bind(getGameState().intProperty("coinsTotal").asString());
+
+        getGameScene().addUINodes(coinsTotal, coin);
+    }
+
+
+    @Override
+    protected void initGameVars(Map<String, Object> vars) {
+        vars.put("coinsTotal", 0);
+    }
+
 
 
     public boolean isJumpActive() {
