@@ -31,7 +31,7 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<100){
+            if(FXGLMath.abs(physics.getVelocityX())<130){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }
@@ -43,7 +43,7 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<100){
+            if(FXGLMath.abs(physics.getVelocityX())<130){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }

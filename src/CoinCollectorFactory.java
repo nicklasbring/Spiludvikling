@@ -30,7 +30,7 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.PLAYER)
                 .from(data)
-                .viewFromNodeWithBBox(new Rectangle(26, 47, Color.BLUE))
+                .viewFromNodeWithBBox(new Rectangle(26, 47))
                 .with(physics)
                 .with(new CollidableComponent(true))
                 .with(new PlayerControl())
@@ -42,9 +42,11 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.COIN)
                 .from(data)
-                .viewFromNodeWithBBox(new Circle(data.<Integer>get("width") / 2, Color.GOLD))
+                .viewFromNodeWithBBox(new Rectangle(35,35))
                 .with(new CollidableComponent(true))
+                .viewFromTexture("coin.png")
                 .build();
+
     }
 
     @Spawns("door")

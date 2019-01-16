@@ -3,7 +3,9 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+
 
 
 public class CoinCollector extends GameApplication {
@@ -42,15 +44,15 @@ public class CoinCollector extends GameApplication {
         getInput().addAction(new UserAction("hop") {
             @Override
             protected void onAction() {
-
-
             }
+
 
             @Override
             protected void onActionBegin() {
                 super.onActionBegin();
                 if(!isJumpActive()) {
                     player.getComponent(PlayerControl.class).hop();
+                    getAudioPlayer().playSound("jumpsound.wav");
                     setJumpActive(true);
                 }
             }
@@ -61,17 +63,7 @@ public class CoinCollector extends GameApplication {
 
             }
         }, KeyCode.SPACE);
-
-
-    /*
-        getInput().addAction(new UserAction("forkert tast") {
-        @Override
-        protected void onActionBegin(){
-            getAudioPlayer().playSound("Error-tone.mp3");
-        }
-    }, KeyCode.SPACE);
-    */
-}
+    }
 
 
     @Override
@@ -80,18 +72,23 @@ public class CoinCollector extends GameApplication {
         getGameWorld().addEntityFactory(new CoinCollectorFactory());
         getGameWorld().setLevelFromMap("coincollector.json");
 
-        player = getGameWorld().spawn("player", 50, 50);
+        player = getGameWorld().spawn("player", 50, 950);
 
-        //getGameScene().setBackgroundRepeat("baggrund.jpg");
-
+        //Image baggrund = new Image("assets/textures/baggrund.jpg", 1920, 1080, false, false);
+        //getGameScene().setBackgroundRepeat(baggrund);  --> Forstår ikke hvorfor dette ikke virker. Det gjorde det forleden
     }
+
+    public int coincounter = 0;
 
     @Override
     protected void initPhysics() {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(CoinCollectorType.PLAYER, CoinCollectorType.COIN) {
             @Override
             protected void onCollisionBegin(Entity player, Entity coin) {
+                getAudioPlayer().playSound("coinsound.mp3");
+                coincounter++;
                 coin.removeFromWorld();
+                System.out.println(coincounter);
             }
         });
 
@@ -99,7 +96,8 @@ public class CoinCollector extends GameApplication {
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(CoinCollectorType.PLAYER, CoinCollectorType.DOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
-                getDisplay().showMessageBox("Congratulation, you made it!");
+                getAudioPlayer().playSound("winnersound.wav");
+                getDisplay().showMessageBox("Tillykke du klarede første level! \nDu fik i alt " + coincounter + " ud af 20");
                 System.out.println("Level completed");
 
             }
