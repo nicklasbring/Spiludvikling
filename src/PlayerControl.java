@@ -1,5 +1,4 @@
 import com.almasb.fxgl.core.math.FXGLMath;
-import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
@@ -32,11 +31,10 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<50){
+            if(FXGLMath.abs(physics.getVelocityX())<100){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }
-
         }
 
 
@@ -45,14 +43,14 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<50){
+            if(FXGLMath.abs(physics.getVelocityX())<100){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }
         }
-
-
     }
+
+
 
     public void venstre(){
         physics.setVelocityX(-150);
@@ -65,7 +63,7 @@ public class PlayerControl extends Component {
     }
 
     public void hop(){
-        physics.setVelocityY(-200);
+        physics.setVelocityY(-350);
     }
 
 

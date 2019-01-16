@@ -8,8 +8,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
-import java.math.BigInteger;
-
 
 public class CoinCollectorFactory implements EntityFactory {
 
@@ -19,6 +17,7 @@ public class CoinCollectorFactory implements EntityFactory {
                 .type(CoinCollectorType.PLATFORM)
                 .from(data)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
                 .with(new PhysicsComponent())
                 .build();
     }
