@@ -18,7 +18,7 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.PLATFORM)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Double>get("width"), data.<Double>get("height"))))
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
                 .build();
     }
@@ -31,7 +31,7 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.PLAYER)
                 .from(data)
-                .viewFromNodeWithBBox(new Rectangle(30, 30, Color.BLUE))
+                .viewFromNodeWithBBox(new Rectangle(26, 47, Color.BLUE))
                 .with(physics)
                 .with(new CollidableComponent(true))
                 .with(new PlayerControl())
@@ -43,7 +43,7 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.COIN)
                 .from(data)
-                .viewFromNodeWithBBox(new Circle(data.<Double>get("width") / 2, Color.GOLD))
+                .viewFromNodeWithBBox(new Circle(data.<Integer>get("width") / 2, Color.GOLD))
                 .with(new CollidableComponent(true))
                 .build();
     }
@@ -53,7 +53,7 @@ public class CoinCollectorFactory implements EntityFactory {
         return Entities.builder()
                 .type(CoinCollectorType.DOOR)
                 .from(data)
-                .bbox(new HitBox(BoundingShape.box(data.<Double>get("width"), data.<Double>get("height"))))
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new CollidableComponent(true))
                 .build();
     }
