@@ -55,11 +55,15 @@ public class PlayerControl extends Component {
     public void venstre(){
         physics.setVelocityX(-150);
         entity.setScaleX(-1);
+
     }
 
     public void hoejre(){
         physics.setVelocityX(150);
         entity.setScaleX(1);
+        
+        if(entity.getX() >= 1960.0)
+            entity.setX(1959.0);
     }
 
     public void hop(){

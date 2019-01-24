@@ -5,6 +5,8 @@ import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -16,8 +18,9 @@ public class CoinCollector extends GameApplication {
     @Override
     protected void initSettings(GameSettings gameSettings) {
 
-        gameSettings.setWidth(28 * 70);
-        gameSettings.setHeight(15 * 70);
+        //Gamescene 1960 x 1050
+        gameSettings.setWidth(1960);  //28*70
+        gameSettings.setHeight(1050);  //15*70
         gameSettings.setTitle("CoinCollector");
     }
 
@@ -73,14 +76,11 @@ public class CoinCollector extends GameApplication {
     protected void initGame() {
 
         getGameWorld().addEntityFactory(new CoinCollectorFactory());
-        getGameWorld().setLevelFromMap("coincollector.json");
+        getGameWorld().setLevelFromMap("coincollector5.json");
 
         player = getGameWorld().spawn("player", 50, 950);
 
-
-
-        //Image baggrund = new Image("assets/textures/baggrund.jpg", 1920, 1080, false, false);
-        //getGameScene().setBackgroundRepeat(baggrund);  --> Forstår ikke hvorfor dette ikke virker. Det gjorde det forleden
+        //getGameScene().setBackgroundRepeat("baggrund.jpg");  //--> Forstår ikke hvorfor dette ikke virker. Det gjorde det forleden
     }
 
     public int coincounter = 0;
