@@ -31,7 +31,7 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<130){
+            if(FXGLMath.abs(physics.getVelocityX())<150){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }
@@ -43,32 +43,32 @@ public class PlayerControl extends Component {
                 texture.loopAnimationChannel(walk);
             }
 
-            if(FXGLMath.abs(physics.getVelocityX())<130){
+            if(FXGLMath.abs(physics.getVelocityX())<150){
                 physics.setVelocityX(0);
                 texture.loopAnimationChannel(idle);
             }
         }
-    }
 
+        //Gør så min spiller ikke længere kan hoppe ud af banen
+        if(entity.getRightX() >= 1960 ){
+            physics.setVelocityX(-150);
+        } if (entity.getX() <= 0){
+            physics.setVelocityX(150);
+        }
+    }
 
 
     public void venstre(){
         physics.setVelocityX(-150);
         entity.setScaleX(-1);
-
     }
 
     public void hoejre(){
         physics.setVelocityX(150);
         entity.setScaleX(1);
-        
-        if(entity.getX() >= 1960.0)
-            entity.setX(1959.0);
     }
 
     public void hop(){
         physics.setVelocityY(-350);
     }
-
-
 }

@@ -3,17 +3,28 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.almasb.fxgl.settings.GameSettings;
 import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.texture.Texture;
+import com.almasb.fxgl.time.LocalTimer;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-
+import javafx.util.Duration;
 import java.util.Map;
 
-
 public class CoinCollector extends GameApplication {
+
+    LocalTimer newLevelTime = new LocalTimer() {
+        @Override
+        public void capture() {
+
+        }
+
+        @Override
+        public boolean elapsed(Duration duration) {
+            return false;
+        }
+    };
 
     @Override
     protected void initSettings(GameSettings gameSettings) {
@@ -76,12 +87,21 @@ public class CoinCollector extends GameApplication {
     protected void initGame() {
 
         getGameWorld().addEntityFactory(new CoinCollectorFactory());
-        getGameWorld().setLevelFromMap("coincollector5.json");
+        getGameWorld().setLevelFromMap("coincollector.json");
 
         player = getGameWorld().spawn("player", 50, 950);
 
+        getGameWorld().spawn("bomb", 950,500);
+        getGameWorld().spawn("bomb", 800,950);
+        getGameWorld().spawn("bomb", 450,300);
+        getGameWorld().spawn("bomb", 1900,500);
+        getGameWorld().spawn("bomb", 710,300);
+        getGameWorld().spawn("bomb", 150,0);
+        getGameWorld().spawn("bomb", 1500,200);
+
         //getGameScene().setBackgroundRepeat("baggrund.jpg");  //--> Forstår ikke hvorfor dette ikke virker. Det gjorde det forleden
     }
+
 
     public int coincounter = 0;
 
@@ -109,11 +129,37 @@ public class CoinCollector extends GameApplication {
             }
         });
 
+
         getPhysicsWorld().addCollisionHandler(new CollisionHandler(CoinCollectorType.PLAYER, CoinCollectorType.PLATFORM) {
             @Override
             protected void onCollisionBegin(Entity player, Entity platform) {
-                setJumpActive(false);
+                if(platform.getBottomY()<=player.getY()){
+                    System.out.println("inside if in platform collision");
+                    setJumpActive(true);
+                } else {
+                    setJumpActive(false);
+                }
+            }
+        });
 
+
+        getPhysicsWorld().addCollisionHandler(new CollisionHandler(CoinCollectorType.PLAYER, CoinCollectorType.ENEMY) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity enemy) {
+
+                getAudioPlayer().playSound("bomb.wav");
+                player.translateY(700);
+                Texture explosion = new Texture(new Image("assets/textures/explosion.png",100,100,true,true));
+                enemy.setView(explosion);
+
+                getMasterTimer().runOnceAfter(() -> {
+                getDisplay().showMessageBox("Bomben var IKKE sikker");
+                }, Duration.seconds(1));
+
+                getMasterTimer().runOnceAfter(() -> {
+                    getGameWorld().setLevelFromMap("coincollector.json");
+                    startNewGame();
+                }, Duration.seconds(1.5));
             }
         });
     }

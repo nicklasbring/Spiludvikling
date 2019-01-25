@@ -4,8 +4,6 @@ import com.almasb.fxgl.physics.BoundingShape;
 import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 
@@ -22,6 +20,22 @@ public class CoinCollectorFactory implements EntityFactory {
                 .build();
     }
 
+
+    @Spawns("bomb")
+    public Entity newBomb(SpawnData data) {
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
+        return Entities.builder()
+                .type(CoinCollectorType.ENEMY)
+                .from(data)
+                .with(new CollidableComponent(true))
+                .with(physics)
+                .with(new BombAnimation())
+                .build();
+    }
+
+
     @Spawns("player")
     public Entity newPlayer(SpawnData data){
         PhysicsComponent physics = new PhysicsComponent();
@@ -37,6 +51,7 @@ public class CoinCollectorFactory implements EntityFactory {
                 .build();
     }
 
+
     @Spawns("coin")
     public Entity newCoin(SpawnData data){
         return Entities.builder()
@@ -48,6 +63,7 @@ public class CoinCollectorFactory implements EntityFactory {
                 .build();
 
     }
+
 
     @Spawns("door")
     public Entity newDoor(SpawnData data){

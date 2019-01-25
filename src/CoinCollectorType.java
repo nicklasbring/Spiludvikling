@@ -1,3 +1,3 @@
 public enum CoinCollectorType {
-     PLATFORM, COIN, PLAYER, DOOR
+     PLATFORM, ENEMY, COIN, PLAYER, DOOR
 }
