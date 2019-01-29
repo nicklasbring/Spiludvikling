@@ -1,4 +1,5 @@
-# Spiludvikling
+# Coincollector
+![](src/assets/textxtures/coincollector.png)
 
 ## Januaropgave
 
