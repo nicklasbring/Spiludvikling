@@ -123,9 +123,15 @@ public class CoinCollector extends GameApplication {
             @Override
             protected void onCollisionBegin(Entity player, Entity door) {
                 getAudioPlayer().playSound("winnersound.wav");
-                getDisplay().showMessageBox("Tillykke du klarede første level! \nDu fik i alt " + coincounter + " ud af 20 coins");
-                System.out.println("Level completed");
 
+                getMasterTimer().runOnceAfter(() -> {
+                    getDisplay().showMessageBox("Tillykke du klarede første level! \nDu fik i alt " + coincounter + " ud af 20 coins");
+                }, Duration.seconds(0.1));
+
+                getMasterTimer().runOnceAfter(() -> {
+                    getGameWorld().setLevelFromMap("coincollector.json");
+                    startNewGame();
+                }, Duration.seconds(1));
             }
         });
 
