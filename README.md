@@ -1,8 +1,6 @@
 # Coincollector
 ![](src/assets/textures/coincollector.png)
 
-## Januaropgave
-
 ## Vi har fået til opgagve at lave et spil, hvor JavaFXGL vil væres vores udgangspunkt for spilopbyggelsen 
 Jeg har valgt at lave et spil kaldet "coincollector". Det går såmænd bare ud på at samle alle mønter på banen, inden man når målet. Bomberne skal man selvfølgelig passe på, for rammer man dem, starter banen forfra. 
 
