@@ -11,3 +11,7 @@ Det er her meningen at man skal lave et ekstra hop på muren.
 
 ## Begrundelse for valg af spil
 Jeg har valgt at holde mit spil rimelig simpelt og løbende tilføje udvidelser. Så er jeg nemlig helt sikker på at jeg forstår hver linje i min kode. 
+
+
+## Download
+Du kan downloade spillet [her](https://github.com/nicklasbring/Spiludvikling/raw/master/releases/spiludvikling.jar)
