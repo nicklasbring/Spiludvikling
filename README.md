@@ -1,5 +1,5 @@
 # Coincollector
-![](src/assets/textxtures/coincollector.png)
+![](src/assets/textures/coincollector.png)
 
 ## Januaropgave
 
